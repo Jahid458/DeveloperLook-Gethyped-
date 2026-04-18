@@ -1,3 +1,4 @@
+import Lees from "./components/Lees/Lees"
 import Hero from "./components/Navbar/Hero"
 import Navbar from "./components/Navbar/Navbar"
 
@@ -9,6 +10,7 @@ const page = () => {
     <div>
       <Navbar/>
       <Hero/>
+      <Lees />
    
     </div>
   )

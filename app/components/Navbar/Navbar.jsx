@@ -18,7 +18,6 @@ const Navbar = () => {
 
   const menuItems = ["Expertises", "Work", "About", "Contact"];
 
-  // 🔥 Scroll hide/show navbar
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY && window.scrollY > 50) {
@@ -39,7 +38,6 @@ const Navbar = () => {
     return () => (document.body.style.overflow = "");
   }, [menuOpen]);
 
-  // 🔥 DESKTOP HOVER EFFECT (TEXT SCROLL + BLACK BG)
   useEffect(() => {
     const items = document.querySelectorAll(".nav-item");
 
@@ -54,14 +52,12 @@ const Navbar = () => {
 
         const tl = gsap.timeline();
 
-        // lift
         tl.to(item, {
           y: -6,
           duration: 0.3,
           ease: "power3.out",
         });
 
-        // bg white → orange → black
         tl.to(
           item,
           {
@@ -76,7 +72,6 @@ const Navbar = () => {
           duration: 0.25,
         });
 
-        // text scroll up
         tl.to(
           text,
           {
@@ -112,7 +107,7 @@ const Navbar = () => {
           ease: "power3.out",
         });
 
-        // reset text
+
         tl.to(
           text,
           {
@@ -148,7 +143,6 @@ const Navbar = () => {
     };
   }, []);
 
-  // 🔥 MOBILE MENU ANIMATION
   useEffect(() => {
     const menu = menuRef.current;
     if (!menu) return;
@@ -205,7 +199,6 @@ const Navbar = () => {
         <div className="h-[12vh] flex items-center justify-between px-4 md:px-8">
           <Logo />
 
-          {/* 🔥 DESKTOP MENU */}
           <div className="hidden md:flex bg-white rounded-xl px-4 py-2 gap-1 text-sm font-semibold">
             {menuItems.map((item) => (
               <div
@@ -222,7 +215,7 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* 🔥 BUTTON */}
+
           <div className="hidden md:flex bg-[#fcb8fa] px-4 py-2 rounded-xl items-center gap-3">
             <p className="text-sm font-semibold">Get Results</p>
             <div className="bg-white p-2 rounded-lg">
@@ -230,7 +223,6 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* 🔥 MOBILE BUTTON */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className={`md:hidden mt-7 mr-5 ${
@@ -256,7 +248,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* 🔥 MOBILE MENU */}
       <div
         ref={menuRef}
         className="fixed inset-0 z-40 mt-4 ml-3 mr-3 rounded-2xl md:hidden flex items-center justify-center"

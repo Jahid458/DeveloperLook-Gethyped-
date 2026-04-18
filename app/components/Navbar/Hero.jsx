@@ -37,8 +37,6 @@ const Hero = () => {
             ? 10
             : -20 
           : 0,
-
-
         zIndex: isMobile
           ? i === 0
             ? 20 
