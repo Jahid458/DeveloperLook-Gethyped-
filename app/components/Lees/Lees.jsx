@@ -170,6 +170,7 @@ const Lees = () => {
           overflow: hidden;
           transform: translateX(-90px);
           will-change: transform, opacity;
+          margin-left: -60px;
         }
 
         .image-wrap img {
@@ -243,7 +244,6 @@ const Lees = () => {
           will-change: transform;
         }
 
-        /* ── Arrow corner ── */
         .arrow-corner {
           position: absolute;
           bottom: 5vh;
