@@ -24,3 +24,9 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+.nav-text,
+.nav-text-duplicate {
+  color: #000000;
+}

@@ -40,8 +40,7 @@ const Navbar = () => {
     return () => (document.body.style.overflow = "");
   }, [menuOpen]);
 
-  // Nav item hover effect
-  useEffect(() => {
+useEffect(() => {
     const items = document.querySelectorAll(".nav-item");
     const handlers = [];
 
@@ -49,27 +48,26 @@ const Navbar = () => {
       const text = item.querySelector(".nav-text");
       const duplicate = item.querySelector(".nav-text-duplicate");
 
+      gsap.set(text, { y: "0%", color: "#000000" });
+      gsap.set(duplicate, { y: "100%", color: "#000000" });
+
       const enter = () => {
         gsap.killTweensOf([item, text, duplicate]);
         const tl = gsap.timeline();
-        // tl.to(item, { y: -4, duration: 0.3, ease: "power3.out" });
-        // tl.to(item, { backgroundColor: "#fdba74", duration: 0.15 }, 0);
-        // tl.to(item, { backgroundColor: "#000000", duration: 0.25 });
-        // tl.to(text,      { y: "-100%", color: "#ffffff", duration: 0.3, ease: "power3.out" }, 0);
-        // tl.to(duplicate, { y: "-100%", color: "#ffffff", duration: 0.3, ease: "power3.out" }, 0);
+
+        tl.to(item, { backgroundColor: "#fa5525", duration: 0.15, ease: "power2.out" }, 0);
+        tl.to(text, { y: "-100%", color: "#ffffff", duration: 0.18, ease: "power3.in" }, 0);
+        tl.to(duplicate, { y: "0%", color: "#ffffff", duration: 0.18, ease: "power3.out" }, 0.03);
+
+        tl.to(item, { backgroundColor: "#000000", duration: 0.2, ease: "power2.inOut" }, 0.18);
       };
 
       const leave = () => {
         gsap.killTweensOf([item, text, duplicate]);
         const tl = gsap.timeline();
-        tl.to(item, {
-          y: 0,
-          backgroundColor: "#ffffff",
-          duration: 0.3,
-          ease: "power3.out",
-        });
-        tl.to(text, { y: "0%", color: "#000000", duration: 0.25 }, 0);
-        tl.to(duplicate, { y: "0%", color: "#000000", duration: 0.25 }, 0);
+        tl.to(item, { backgroundColor: "#ffffff", duration: 0.28, ease: "power2.out" }, 0);
+        tl.to(text, { y: "0%", color: "#000000", duration: 0.25, ease: "power3.out" }, 0);
+        tl.to(duplicate, { y: "100%", color: "#000000", duration: 0.25, ease: "power3.in" }, 0);
       };
 
       item.addEventListener("mouseenter", enter);
@@ -111,7 +109,7 @@ const Navbar = () => {
     tl.to(
       items,
       { y: 0, opacity: 1, stagger: 0.08, duration: 0.4, ease: "power3.out" },
-      "-=0.3",
+      "-=0.3"
     );
 
     if (menuOpen) tl.play();
@@ -163,7 +161,8 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
           show ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -174,18 +173,27 @@ const Navbar = () => {
             {menuItems.map((item) => (
               <div
                 key={item}
-                className="nav-item cursor-pointer px-5 py-2 rounded-lg bg-white overflow-hidden"
+                className="nav-item cursor-pointer px-2 py-0 rounded-lg bg-white"
+                style={{ transition: "border-radius 0.2s" }}
               >
-                <div className="relative h-5 overflow-hidden">
-                  <span className="nav-text block">{item}</span>
-                  <span className="nav-text-duplicate block absolute left-0 top-full">
+                <div className="relative overflow-hidden" style={{ height: "20px", lineHeight: "20px" }}>
+                  <span
+                    className="nav-text block whitespace-nowrap"
+                    style={{ willChange: "transform, color" }}
+                  >
+                    {item}
+                  </span>
+                  <span
+                    className="nav-text-duplicate block absolute left-0 top-0 whitespace-nowrap"
+                    style={{ willChange: "transform, color", transform: "translateY(100%)" }}
+                  >
                     {item}
                   </span>
                 </div>
               </div>
             ))}
           </div>
- 
+
           <button
             ref={btnRef}
             onMouseEnter={() => handleBtnEnter(btnRef, btnTextRef)}
@@ -211,26 +219,18 @@ const Navbar = () => {
             </div>
           </button>
 
-
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className={`md:hidden mt-7 mr-5 ${
               menuOpen ? "bg-white" : "bg-[#fcb8fa]"
             } p-4 rounded-lg flex flex-col gap-1 z-50`}
           >
-            <span
-              className={`h-0.5 w-6 bg-black transition ${menuOpen ? "rotate-45 translate-y-1.5" : ""}`}
-            />
-            <span
-              className={`h-0.5 w-6 bg-black transition ${menuOpen ? "opacity-0" : ""}`}
-            />
-            <span
-              className={`h-0.5 w-6 bg-black transition ${menuOpen ? "-rotate-45 -translate-y-1.5" : ""}`}
-            />
+            <span className={`h-0.5 w-6 bg-black transition ${menuOpen ? "rotate-45 translate-y-1.5" : ""}`} />
+            <span className={`h-0.5 w-6 bg-black transition ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`h-0.5 w-6 bg-black transition ${menuOpen ? "-rotate-45 -translate-y-1.5" : ""}`} />
           </button>
         </div>
       </nav>
-
 
       <div
         ref={menuRef}
